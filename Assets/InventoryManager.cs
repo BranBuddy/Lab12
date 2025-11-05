@@ -4,10 +4,12 @@ using System.Collections.Generic;
 public class InventoryManager : MonoBehaviour
 {
     public List<InventoryItem> inventory = new List<InventoryItem>();
+    string[] items = { "Sword", "Shield", "Potion", "Key", "Food", "SpellBook" };
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         InitializeInventory();
+        LinearSearchByName();
     }
 
     // Update is called once per frame
@@ -18,7 +20,6 @@ public class InventoryManager : MonoBehaviour
 
     void InitializeInventory()
     {
-        string[] items = { "Sword", "Shield", "Potion", "Key", "Food", "SpellBook" };
 
         for (int i = 0; i < 5; i++)
         {
@@ -33,6 +34,19 @@ public class InventoryManager : MonoBehaviour
         foreach (InventoryItem item in inventory)
         {
             Debug.Log($"Item: {item.Name} | ID: {item.ID} | Value: {item.Value}");
+        }
+    }
+
+    void LinearSearchByName()
+    {
+        string RandomChosenName = items[Random.Range(0, items.Length)];
+        foreach (InventoryItem item in inventory)
+        {
+            if (RandomChosenName == item.Name)
+            {
+                Debug.Log($"Searching for Item: {item.Name}");
+                Debug.Log($"Found Item! Item: {item.Name} | ID: {item.ID} | Value: {item.Value}");
+            }
         }
     }
 }
