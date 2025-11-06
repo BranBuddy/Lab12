@@ -151,8 +151,9 @@ public class InventoryManager : MonoBehaviour
         Swap(arr, first, swapIndex);
         return swapIndex;
     }
-    
-    public static int[] QuickSort(int[] arr, int first, int last){
+
+    public static int[] QuickSort(int[] arr, int first, int last)
+    {
         if (first < last)
         {
             int pivot = Partion(arr, first, last);
@@ -160,5 +161,31 @@ public class InventoryManager : MonoBehaviour
             QuickSort(arr, pivot + 1, last);
         }
         return arr;
+    }
+
+    public int CalculateTotalInventoryValue()
+    {
+        int totalValue = 0;
+
+        foreach (var item in inventory)
+        {
+            totalValue += item.Value;
+        }
+
+        return totalValue;
+    }
+    
+    public List<InventoryItem> FilterItemsByValueRange(int minValue, int maxValue){
+
+        List<InventoryItem> filtered = new List<InventoryItem>();
+
+        foreach (var item in inventory)
+        {
+            if (item.Value > minValue && item.Value < maxValue)
+            {
+                filtered.Add(item);
+            }
+        }
+        return filtered;
     }
 }
